@@ -348,6 +348,7 @@ bool DebugFrontend::InjectDll(DWORD processId, const char* dllFileName)
 
     if (process == NULL)
     {
+        OutputError(GetLastError());
         return false;
     }
     
@@ -1170,6 +1171,10 @@ void DebugFrontend::OutputError(DWORD error)
     {
         std::string message = "Error: ";
         message += buffer;
+        while (message[message.length() - 1] < ' ')
+        {
+				    message.erase(message.length() - 1);
+        }
         MessageEvent(message, MessageType_Error);
     }
 

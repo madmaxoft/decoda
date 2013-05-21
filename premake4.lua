@@ -42,9 +42,14 @@ project "Frontend"
 		"Shared",		
 	}
 
+	-- multithreaded compiling in VS
+	if (_ACTION == "vs2010") or (_ACTION == "vs2008") then
+		buildoptions { "/MP"  }
+	end
+
     configuration "Debug"
         defines { "DEBUG" }
-        flags { "Symbols" }
+        flags { "Symbols", "NoMinimalRebuild" }
         targetdir "bin/debug"
 		includedirs { "libs/wxWidgets/lib/vc_lib/mswd" }
 		links {
@@ -81,7 +86,11 @@ project "Frontend"
 			"wxmsw28_html",
 			"wxpng",
 		}		
-		
+
+
+
+
+
 project "LuaInject"
     kind "SharedLib"
     location "build"
@@ -107,9 +116,14 @@ project "LuaInject"
 		"psapi",
 	}
 
+	-- multithreaded compiling in VS
+	if (_ACTION == "vs2010") or (_ACTION == "vs2008") then
+		buildoptions { "/MP"  }
+	end
+
     configuration "Debug"
         defines { "DEBUG" }
-        flags { "Symbols" }
+        flags { "Symbols", "NoMinimalRebuild" }
         targetdir "bin/debug"
 		links { "tinyxmld_STL" }
 
@@ -118,6 +132,10 @@ project "LuaInject"
         flags { "Optimize" }
         targetdir "bin/release"				
 		links { "tinyxml_STL" }
+
+
+
+
 		
 project "Shared"
     kind "StaticLib"
@@ -134,13 +152,17 @@ project "Shared"
     links {
 	}
 
+	-- multithreaded compiling in VS
+	if (_ACTION == "vs2010") or (_ACTION == "vs2008") then
+		buildoptions { "/MP"  }
+	end
+
     configuration "Debug"
         defines { "DEBUG" }
-        flags { "Symbols" }
+        flags { "Symbols", "NoMinimalRebuild" }
         targetdir "bin/debug"
 
     configuration "Release"
         defines { "NDEBUG" }
         flags { "Optimize" }
         targetdir "bin/release"		
-		

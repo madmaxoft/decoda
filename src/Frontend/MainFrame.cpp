@@ -2125,6 +2125,7 @@ void MainFrame::OnNotebookPageChanged(wxAuiNotebookEvent& event)
         m_fileChangeWatcher.SetFile(file->file->fileName);
         
         SetMostRecentlyUsedPage(pageIndex);
+        m_openFiles[pageIndex]->edit->SetFocus();
     }    
     
     UpdateStatusBarLineAndColumn();
